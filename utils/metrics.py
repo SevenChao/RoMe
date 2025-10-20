@@ -1,4 +1,4 @@
-import mmcv
+import cv2
 import numpy as np
 
 
@@ -33,7 +33,7 @@ def intersect_and_union(pred_label,
         pred_label = np.load(pred_label)
 
     if isinstance(label, str):
-        label = mmcv.imread(label, flag='unchanged', backend='pillow')
+        label = cv2.imread(label, cv2.IMREAD_UNCHANGED)
     # modify if custom classes
     if label_map is not None:
         for old_id, new_id in label_map.items():

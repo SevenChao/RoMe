@@ -3,6 +3,12 @@ import argparse
 import yaml
 from tqdm import tqdm
 import random
+import sys
+import os
+
+# Add project root to Python path
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, project_root)
 
 # Third-party imports
 import numpy as np
@@ -10,8 +16,10 @@ import torch
 import os
 import cv2
 from os.path import join
+
 from torch.optim.lr_scheduler import MultiStepLR
 from torch.utils.data import DataLoader
+
 from pytorch3d.renderer import PerspectiveCameras
 from pytorch3d.loss import mesh_laplacian_smoothing
 
@@ -27,7 +35,7 @@ from utils.wandb_loggers import WandbLogger
 from utils.image import render_semantic
 
 # Local imports - Evaluation
-from eval import eval
+from scripts.eval import eval
 
 
 def set_randomness(args):

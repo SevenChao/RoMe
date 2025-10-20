@@ -1,17 +1,17 @@
 wandb:
-  name: "######"
-  dir: "######/temp_file/wandb"
-  entity: "######"
+  name: "rome_nusc_eval"
+  dir: "./temp_file/wandb"
+  entity: "your_entity"
   tags: []
-  project: "######"
+  project: "rome_nusc_eval"
 
 # when on cluster, no wandb logs
 cluster: False
 replace_name: False
 
 # 05
-model_path: "######/temp_file/wandb/wandb/run-20230712_163549-1xh5hwjo/files/grid_baseline.pt"
-pose_path: "######/temp_file/wandb/wandb/run-20230712_163549-1xh5hwjo/files/pose_baseline.pt"
+model_path: "./temp_file/wandb/wandb/run-20230712_163549-1xh5hwjo/files/grid_baseline.pt"
+pose_path: "./temp_file/wandb/wandb/run-20230712_163549-1xh5hwjo/files/pose_baseline.pt"
 
 # BEV size
 bev_x_length: 100
@@ -46,8 +46,8 @@ num_workers: 2
 
 dataset: "NuscDataset"
 version: "mini" 
-base_dir: "######/Nuscenes"
-image_dir: "######/nuScenes/"
+base_dir: "./data/Nuscenes"
+image_dir: "./data/nuScenes/"
 
 clip_list:
 - "scene-0655"

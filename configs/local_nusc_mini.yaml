@@ -1,9 +1,9 @@
 wandb:
-  name: "######"
-  dir: "######/temp_file/wandb"
-  entity: "######"
+  name: "rome_nusc_mini_experiment"
+  dir: "./temp_file/wandb"
+  entity: "your_entity"
   tags: []
-  project: "######"
+  project: "rome_nusc_mini"
 
 # when on cluster, no wandb logs
 cluster: False
@@ -47,8 +47,8 @@ num_workers: 8
 
 dataset: "NuscDataset"
 version: "mini" 
-base_dir: "######/Nuscenes"
-image_dir: "######/nuScenes/"
+base_dir: "./data/Nuscenes"
+image_dir: "./data/nuScenes/"
 eval: False
 
 clip_list:

@@ -4,3 +4,4 @@ __pycache__
 *.pyc
 /wandb
 ./configs/*
+temp_file/*

@@ -1,9 +1,9 @@
 wandb:
-  name: "######"
-  dir: "######/temp_file/wandb"
-  entity: "######"
+  name: "rome_kitti_experiment"
+  dir: "./temp_file/wandb"
+  entity: "your_entity"
   tags: []
-  project: "######"
+  project: "rome_kitti"
 
 # when on cluster, no wandb logs
 cluster: False
@@ -45,8 +45,8 @@ num_workers: 6
 
 
 dataset: "KittiDataset"
-base_dir: "######/KittiOdom"
-image_dir: "######/KittiOdom"
+base_dir: "./data/KittiOdom"
+image_dir: "./data/KittiOdom"
 eval: False
 
 sequence: "00"
