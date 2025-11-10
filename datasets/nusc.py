@@ -54,21 +54,28 @@ class NuscDataset(BaseDataset):
                 lidar2chassis = self.compute_extrinsic2chassis(samp)
                 chassis2world = self.compute_chassis2world(samp)
                 lidar2world = chassis2world @ lidar2chassis
+                # get all lidar2world pose
                 lidar2world_all.append(lidar2world)
                 lidar_height.append(lidar2chassis[2, 3])
+
+                # enumerate every single camera in the single clip
                 for camera_idx, cam in enumerate(camera_names):
                     # compute camera key frame poses
                     rec_token = rec["data"][cam]
                     samp = self.nusc.get("sample_data", rec_token)
+                    #  get camera extrinsic
                     camera2chassis = self.compute_extrinsic2chassis(samp)
+                    # camera front is the reference camera
                     if cam == "CAM_FRONT":
                         camera_front2_camera_ref = np.eye(4)
                         camera_ref2_camera_front = np.eye(4)
                     else:
+                        # get other camera extrinsic to the front camera
                         rec_token_front = rec["data"]["CAM_FRONT"]
                         samp_front = self.nusc.get("sample_data", rec_token_front)
                         camera_front2_camera_ref = self.compute_extrinsic(samp_front, samp)
                         camera_ref2_camera_front = np.linalg.inv(camera_front2_camera_ref)
+                    # save all camera extrinsic
                     self.camera_extrinsics.append(camera_ref2_camera_front.astype(np.float32))
                     flag = True
                     # compute first key frame and framse between first frame and second frame

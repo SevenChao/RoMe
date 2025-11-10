@@ -1,0 +1,85 @@
+wandb:
+  name: "rome_gac_experiment"
+  dir: "./temp_file/wandb"
+  entity: "your_entity"
+  tags: []
+  project: "rome_gac"
+
+# when on cluster, no wandb logs
+cluster: False
+replace_name: False
+
+# BEV size
+bev_x_length: 100
+bev_y_length: 100
+bev_resolution: 0.1  # meters
+bev_x_pixel: 1000
+bev_y_pixel: 1000
+cut_range: 8
+
+# Training Parameters
+waypoint_radius: 120  # meters
+batch_size: 4
+pos_enc: 5
+lr: 
+  vertices_rgb: 0.1
+  vertices_label: 0.1
+  vertices_z: 0.001
+  rotations: 0.01
+  translations: 0.01
+
+extrinsic:  # extrinsic optimization range
+  rotation_deg: 0.5
+  translation_m: 0.5
+  start_epoch: 0
+
+lr_milestones: [1, 4]
+lr_gamma: 0.1
+seg_loss_weight: 0.06
+normal_loss_weight: 0
+laplacian_loss_weight: 10
+rand_seed: 17
+epochs: 7
+
+# Performance Parameters
+num_workers: 8
+
+# Dataset Configuration
+dataset: "GACRNDDataset"
+base_dir: "/home/stevenchao/CBZoom/Auto-Labeling/Dataset/GACRT026_1758521322"
+image_dir: "/home/stevenchao/CBZoom/Auto-Labeling/Dataset/GACRT026_1758521322"
+label_dir: "/home/stevenchao/CBZoom/Auto-Labeling/Dataset/GACRT026_1758521322"
+lane_dir: "/home/stevenchao/CBZoom/Auto-Labeling/Dataset/GACRT026_1758521322"
+ego_mask_dir: null  # Optional: directory name for ego vehicle masks (e.g., "ego_mask" or "image_ego_mask")
+                     # If None, will try to identify ego vehicle from label using ego_label_values
+eval: False
+
+center_point:
+  x: 0.0
+  y: 0.0
+
+# minimum distance between frame to sample the dataset
+min_distance: 0.2
+
+# resized image size
+image_width: 800
+image_height: 450
+
+# LiDAR and Pose Configuration
+lidar_name: "lidar-top"  # or "lidar_top", "top"
+pose_file_type: "auto"  # "auto", "odom.csv", "FramePose.txt"
+max_pose_time_diff_ms: 100  # Maximum time difference for pose lookup (100ms for synchronized, larger for unsynchronized)
+
+# Ego Vehicle Mask Configuration
+# Option 1: Use mask files (recommended if ego_mask_dir is specified)
+# Option 2: Identify from label using gray values (if ego_label_values is specified)
+ego_label_values: null  # Optional: list of gray values for ego vehicle in labels (e.g., [64, 65])
+                        # If both ego_mask_dir and ego_label_values are None, ego vehicle won't be masked
+
+# Camera-specific Body Occlusion Mask Configuration
+# Directory containing camera-specific masks for body occlusion (e.g., camera_mask/front_wide_mask.png)
+# If a camera doesn't have a mask file, it means that camera has no body occlusion issues
+camera_mask_dir: "camera_mask"  # Relative to project root, or absolute path
+                                 # Mask files should be named: {camera_name}_mask.png
+                                 # White (255) pixels = areas to filter out
+
